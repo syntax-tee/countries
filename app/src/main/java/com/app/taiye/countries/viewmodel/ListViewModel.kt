@@ -3,6 +3,7 @@ package com.app.taiye.countries.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.app.taiye.countries.di.DaggerAppComponent
 import com.app.taiye.countries.model.CountriesService
 import com.app.taiye.countries.model.Country
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,12 +14,15 @@ import javax.inject.Inject
 
 class ListViewModel @Inject constructor(): ViewModel() {
 
-    val countriesService = CountriesService()
-
+    lateinit var countriesService:CountriesService
     private val disposable = CompositeDisposable()
 
 
     init {
+
+        val appComponent = DaggerAppComponent.builder().build()
+        countriesService = appComponent.getCountriesService()
+
         Log.d(TAG, ": ListViewModel  is added to dependency graph ")
     }
 
