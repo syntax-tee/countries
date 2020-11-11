@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.taiye.CountryApp
 import com.app.taiye.countries.R
-import com.app.taiye.countries.di.DaggerCountryComponent
+import com.app.taiye.countries.di.DaggerAppComponent
 import com.app.taiye.countries.viewmodel.ListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -20,13 +20,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewModel: ListViewModel
 
     @Inject
-    lateinit var  countriesAdapter:CountryListAdapter
+    lateinit var countriesAdapter: CountryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val countryComponent = DaggerCountryComponent.builder().appComponent(CountryApp.getAppComponent()).build()
+        val countryComponent = CountryApp.getAppComponent().getCountryActivityComponent().build()
         countryComponent.inject(this)
 
         viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
@@ -46,20 +46,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun observeViewModel() {
-        viewModel.countries.observe(this, Observer {countries ->
+        viewModel.countries.observe(this, Observer { countries ->
             countries?.let {
                 countriesList.visibility = View.VISIBLE
-                countriesAdapter.updateCountries(it) }
+                countriesAdapter.updateCountries(it)
+            }
         })
 
         viewModel.countryLoadError.observe(this, Observer { isError ->
-            isError?.let { list_error.visibility = if(it) View.VISIBLE else View.GONE }
+            isError?.let { list_error.visibility = if (it) View.VISIBLE else View.GONE }
         })
 
         viewModel.loading.observe(this, Observer { isLoading ->
             isLoading?.let {
-                loading_view.visibility = if(it) View.VISIBLE else View.GONE
-                if(it) {
+                loading_view.visibility = if (it) View.VISIBLE else View.GONE
+                if (it) {
                     list_error.visibility = View.GONE
                     countriesList.visibility = View.GONE
                 }

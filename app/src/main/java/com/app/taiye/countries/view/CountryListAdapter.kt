@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.taiye.countries.R
+import com.app.taiye.countries.di.PerActivity
 import com.app.taiye.countries.model.Country
 import com.app.taiye.countries.util.getProgressDrawable
 import com.app.taiye.countries.util.loadImage
 import kotlinx.android.synthetic.main.item_country.view.*
 import javax.inject.Inject
 
+@PerActivity
 class CountryListAdapter @Inject constructor(var countries: ArrayList<Country>): RecyclerView.Adapter<CountryListAdapter.CountryViewHolder>() {
 
 

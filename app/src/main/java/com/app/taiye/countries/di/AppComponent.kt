@@ -11,6 +11,7 @@ interface AppComponent {
 
 
     fun getCountriesService(): CountriesService
+    fun  getCountryActivityComponent(): CountryComponent.Builder
 
     @Component.Builder
     interface Builder {
