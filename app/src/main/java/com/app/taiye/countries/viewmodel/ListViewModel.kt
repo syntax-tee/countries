@@ -20,7 +20,7 @@ class ListViewModel @Inject constructor(): ViewModel() {
 
     init {
 
-        val appComponent = DaggerAppComponent.builder().build()
+        val appComponent = DaggerAppComponent.create()
         countriesService = appComponent.getCountriesService()
 
         Log.d(TAG, ": ListViewModel  is added to dependency graph ")

@@ -11,10 +11,10 @@ interface AppComponent {
 
 
     fun getCountriesService(): CountriesService
-    fun  getCountryActivityComponent(): CountryComponent.Builder
+    fun  getCountryActivityComponent(): CountryComponent.Factory
 
-    @Component.Builder
-    interface Builder {
+    @Component.Factory
+    interface Factory {
 
         fun build(): AppComponent
     }

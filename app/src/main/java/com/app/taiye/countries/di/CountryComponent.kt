@@ -11,9 +11,9 @@ interface CountryComponent {
 
     fun inject(activity: MainActivity)
 
-    @Subcomponent.Builder
-    interface  Builder {
-        fun build(): CountryComponent
+    @Subcomponent.Factory
+    interface  Factory {
+        fun create(): CountryComponent
     }
 
 }

@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val countryComponent = CountryApp.getAppComponent().getCountryActivityComponent().build()
+        val countryComponent = CountryApp.getAppComponent().getCountryActivityComponent().create()
         countryComponent.inject(this)
 
         viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
